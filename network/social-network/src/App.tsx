@@ -27,8 +27,10 @@ import Routes from "./routes/routes";
 import {UserIdContext} from "./components/context/AppContext";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import React from 'react';
+import {getUser} from "./redux/slices/userSlice/user.slice";
+import {getAllUsers} from "./redux/slices/allUsers/AllUsers.slice";
 
 setupIonicReact();
 
@@ -36,6 +38,7 @@ const App: React.FC = () => {
     // @ts-ignore
     const loginSelector = useSelector(state=> state.login)
     const [userId, setUserId] = useState(null)
+    const dispatch = useDispatch()
 
     // @ts-ignore
     useEffect(() => {
@@ -52,7 +55,19 @@ const App: React.FC = () => {
 
         fetchToken();
 
-    }, [userId])
+        if(userId) {
+            axios.get(`${process.env.REACT_APP_API}api/user/${userId}`).then((res)=> {
+                dispatch(getUser(res.data))
+            }).catch(err => console.log(err))
+
+
+        }
+
+        axios.get(`${process.env.REACT_APP_API}api/user/`).then((res)=> {
+            dispatch(getAllUsers(res.data))
+        }).catch(err => console.log(err))
+
+    }, [dispatch, loginSelector.token, userId])
 
 
     return (

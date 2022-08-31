@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+
 // @ts-ignore
 import {Provider} from "react-redux";
 import {store} from "./redux/redux";
 import {PersistGate} from "redux-persist/integration/react";
 import {persistor} from "./redux/redux";
+import {getAllUsers} from "./redux/slices/allUsers/AllUsers.slice";
+
 
 
 ReactDOM.render(

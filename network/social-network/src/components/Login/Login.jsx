@@ -4,9 +4,9 @@ import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 import "./login.css"
 
-const Login = (props) => {
-    const [signUpModal, setSignUpModal] = useState(false)
-    const [signInModal, setSignInModal] = useState(true)
+const Login = ({signin,signup}) => {
+    const [signUpModal, setSignUpModal] = useState(signup)
+    const [signInModal, setSignInModal] = useState(signin)
 
     const handleModals = (e) => {
         if (e.target.id === "register") {

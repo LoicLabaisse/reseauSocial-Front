@@ -8,14 +8,18 @@ import {persistStore, persistReducer} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import {combineReducers} from "@reduxjs/toolkit";
 import {loginSlice} from "./slices/loginSlices/loginSlice";
+import {userSlice} from "./slices/userSlice/user.slice";
+import {AllUsersSlice} from "./slices/allUsers/AllUsers.slice";
 const persistConfig = {
     key: "root",
     version: 1,
     storage,
-    blacklist: ['users', "strava", "newPlan", "updateForm"]
+
 };
 const reducers = combineReducers({
     login : loginSlice.reducer,
+    user : userSlice.reducer,
+    allUsers : AllUsersSlice.reducer,
     persistConfig,
 });
 
